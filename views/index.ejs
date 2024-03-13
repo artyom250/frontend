@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Application</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/users.css">
+    <link rel="stylesheet" href="/overlay.css">
+
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>    
+</head>
+<body>
+    <div class="search">
+        <input type="text" placeholder="Search here..." id="searchInput" name="query" required>
+    </div>
+    <div class="users">
+        <% users.forEach(user => { %>
+            <div class="user" onclick="showUserData('<%= user.name %>', '<%= user.phone %>', '<%= user.email %>', '<%= user.hire_date %>', '<%= user.position_name %>', '<%= user.department %>')">
+                <p class="name"><%= user.name %></p>
+                <div class="icons">
+                    <i class='bx bx-phone-call'></i>
+                    <p><%= user.phone %></p>
+                </div>
+                <div class="icons" style="margin-top: 6px;">
+                    <i class='bx bxs-envelope' ></i>
+                    <p><%= user.email %></p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    <div class="overlay">
+        <div class="data">
+            <div class="flex1">
+                <p id="overlayName"></p>
+                <i class='bx bx-x-circle' onclick="hideUserData()"></i>
+            </div>
+            <div class="more">
+                <div>
+                    <p>Телефон:</p>
+                    <p id="phone"></p>
+                </div>
+                <div>
+                    <p>Почта:</p>
+                    <p id="email"></p>
+                </div>
+                <div>
+                    <p>Дата приема:</p>
+                    <p id="hire_date"></p>
+                </div>
+                <div>
+                    <p>Должность:</p>
+                    <p id="position_name"></p>
+                </div>
+                <div>
+                    <p>Подразделение:</p>
+                    <p id="department"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const users = document.querySelectorAll(".user");
+
+        searchInput.addEventListener("input", function() {
+            const query = this.value.toLowerCase();
+            users.forEach(user => {
+                const name = user.querySelector(".name").innerText.toLowerCase();
+                if (name.includes(query)) {
+                    user.style.display = "block";
+                } else {
+                    user.style.display = "none";
+                }
+            });
+        });
+
+        function showUserData(name, phone, email, hire_date, position_name, department) {
+            document.getElementById("overlayName").innerText = name;
+            document.getElementById("phone").innerText = phone;
+            document.getElementById("email").innerText = email;
+            document.getElementById("hire_date").innerText = hire_date;
+            document.getElementById("position_name").innerText = position_name;
+            document.getElementById("department").innerText = department;
+            const overlay = document.querySelector(".overlay");
+            overlay.classList.add("show");
+        }
+
+        function hideUserData() {
+            const overlay = document.querySelector(".overlay");
+            overlay.classList.remove("show");
+        }
+    </script>
+</body>
+</html>

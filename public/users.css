@@ -1,0 +1,51 @@
+.users {
+    display: grid;
+    margin: 0px auto 0px auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 36px 0px 100px 0px;
+    max-width: 1200px;
+}
+
+.user {
+    cursor: pointer;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, .1);
+    padding: 36px;
+    border-radius: 15px;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 18px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 15px;
+}
+
+.icons p {
+    color: #8189A3;
+    font-size: 14px;
+}
+
+.icons i {
+    color: #6366f1;
+    font-size: 24px;
+}
+
+@media(max-width: 1300px) {
+    .users {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 900px) {
+    .users {
+        grid-template-columns: 1fr;
+    }
+}
